@@ -3,7 +3,11 @@ package StudyGroup;
 public class Coordinates {
     private Long x; //Поле не может быть null
     private double y; //Значение поля должно быть больше -352
-
+    public Coordinates(Long x, double y) {
+        this.x = x;
+        this.y = y;
+    }
+    public Coordinates(){}
     /**
      *
      * @throws IllegalArgumentException if any parameter is not correct...

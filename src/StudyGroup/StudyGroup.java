@@ -5,7 +5,7 @@ import java.time.ZonedDateTime;
 /**
  * @author Ilya Rakin ISU 336934
  */
-public class StudyGroup {
+public class StudyGroup implements Comparable {
     private Long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
@@ -24,13 +24,22 @@ public class StudyGroup {
      * @param studentsCount Students Count
      * @param expelledStudents Expelled Students
      * @param formOfEducation Form of education
-     * @param semesterEnum Number of semester
+     * @param semesterEnum Number of semesters
      * @param groupAdmin Admin of group
      */
-    public StudyGroup(Long id, String name, Coordinates coordinates, ZonedDateTime creationDate, long studentsCount,
-                      Long expelledStudents, FormOfEducation formOfEducation, Semester semesterEnum, Person groupAdmin) {
+    public StudyGroup(Long id, String name, ZonedDateTime creationDate, long studentsCount, Long expelledStudents,
+                      FormOfEducation formOfEducation, Semester semesterEnum, Person groupAdmin, Coordinates coordinates) {
+        this.id = id;
+        this.name = name;
+        this.coordinates = coordinates;
+        this.creationDate = creationDate;
+        this.studentsCount = studentsCount;
+        this.expelledStudents = expelledStudents;
+        this.formOfEducation = formOfEducation;
+        this.semesterEnum = semesterEnum;
+        this.groupAdmin = groupAdmin;
     }
-
+    public StudyGroup(){}
     /**
      * @return id
      */
@@ -196,16 +205,21 @@ public class StudyGroup {
 
     @Override
     public String toString() {
-        return "StudyGroup{" +
+        return "Учебная группа {" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", coordinates=" + coordinates +
-                ", creationDate=" + creationDate +
-                ", studentsCount=" + studentsCount +
-                ", expelledStudents=" + expelledStudents +
-                ", formOfEducation=" + formOfEducation +
-                ", semesterEnum=" + semesterEnum +
-                ", groupAdmin=" + groupAdmin +
+                ", имя ='" + name + '\'' +
+                ", координаты = " + coordinates +
+                ", дата создания = " + creationDate +
+                ", количество студентов = " + studentsCount +
+                ", отчисленных студентов = " + expelledStudents +
+                ", форма обучения = " + formOfEducation +
+                ", семестр = " + semesterEnum +
+                ", админ группы = " + groupAdmin +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
     }
 }

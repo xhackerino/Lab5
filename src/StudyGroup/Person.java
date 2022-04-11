@@ -5,11 +5,16 @@ public class Person {
     private String passportID; //Поле не может быть null
     private Color eyeColor; //Поле не может быть null
     private Country nationality; //Поле может быть null
-
+    public Person(String name, String passportID, Color eyeColor, Country nationality){
+        this.name = name;
+        this.passportID = passportID;
+        this.eyeColor=eyeColor;
+        this.nationality=nationality;
+    }
+    public Person(){}
     public String getName() {
         return name;
     }
-
     /**
      *
      * @param name Name can't be null or empty!
@@ -71,11 +76,11 @@ public class Person {
     }
     @Override
     public String toString() {
-        return "Person{" +
-                "name='" + name + '\'' +
-                ", passportID='" + passportID + '\'' +
-                ", eyeColor=" + eyeColor +
-                ", nationality=" + nationality +
+        return "Персонаж {" +
+                "имя ='" + name + '\'' +
+                ", номер паспорта ='" + passportID + '\'' +
+                ", цвет глаз = " + eyeColor +
+                ", национальность = " + nationality +
                 '}';
     }
 }
