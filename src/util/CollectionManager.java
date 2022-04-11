@@ -133,7 +133,7 @@ public class CollectionManager {
             if (indeks == index) {
                 studyGroup.remove(group);
                 Print("Элемент удален");
-                Print(studyGroup.toString());
+//                Print(studyGroup.toString());
             }
             indeks++;
         }
