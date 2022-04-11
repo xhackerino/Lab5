@@ -11,3 +11,4 @@ SOUTH_KOREA
 10
 20
 save
+exit
