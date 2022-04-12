@@ -5,12 +5,19 @@ import util.CollectionManager;
 import java.io.IOException;
 import Exception.EmptyIOException;
 
+/**
+ * Команда 'print_field_ascending_students_count'. Выводит значения поля studentsCount всех элементов коллекции в порядке возрастания.
+ */
 public class PrintFieldAscendingStudentsCount implements Command {
     CollectionManager collectionManager;
+
+    /**
+     * Конструктор команды.
+     * @param collectionManager менеджер коллекции.
+     */
     public PrintFieldAscendingStudentsCount(CollectionManager collectionManager) {
         this.collectionManager = collectionManager;
     }
-
     @Override
     public String getName() {
         return "print_field_ascending_students_count";

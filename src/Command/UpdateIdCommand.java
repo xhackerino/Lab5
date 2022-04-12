@@ -9,6 +9,9 @@ import util.ConsoleManager;
 
 import static util.ConsoleManager.PrintError;
 
+/**
+ * Команда 'update id'. Обновляет значение элемента коллекции, id которого равен заданному.
+ */
 public class UpdateIdCommand implements Command {
     CollectionManager collectionManager;
     ConsoleManager consoleManager;

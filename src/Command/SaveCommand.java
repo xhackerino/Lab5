@@ -5,8 +5,16 @@ import util.CollectionManager;
 import java.io.IOException;
 import Exception.EmptyIOException;
 
+/**
+ * Команда 'save'. Сохраняет коллекцию в файл.
+ */
 public class SaveCommand implements Command {
     CollectionManager collectionManager;
+
+    /**
+     * Конструктор команды.
+     * @param cm коллекция
+     */
     public SaveCommand(CollectionManager cm) {
         this.collectionManager = cm;
     }

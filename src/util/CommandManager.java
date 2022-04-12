@@ -49,7 +49,7 @@ public class CommandManager {
      * @param scanner    Сканер команд.
      * @param commands   Список команд.
      * @throws IOException в случае ошибки ввода-вывода.
-     * @see CollectionManager
+     * @see CollectionManager Менеджер коллекций.
      */
 //    public CommandManager(Scanner scanner, Command[] commands, CollectionManager collection,
 //                          ConsoleManager console, Info info, Show show, AddCommand add, UpdateIdCommand updateId, RemoveByIdCommand removeById,
@@ -62,24 +62,14 @@ public class CommandManager {
         this.scanner = scanner;
         this.commands = commands;
         openedScripts = new Stack<String>();
-
-//        this.info = info;
-//        this.show = show;
-//        this.add = add;
-//        this.updateId = updateId;
-//        this.removeById = removeById;
-//        this.clear = clear;
-//        this.save = save;
-//        this.exit = exit;
-//        this.removeAt = removeAt;
-//        this.removeLast = removeLast;
-//        this.removeGreater = removeGreater;
-//        this.sumOfExpelledStudents = sumOfExpelledStudents;
-//        this.filterStartsWithName = filterStartsWithName;
-//        this.printFieldAscendingStudentsCount = printFieldAscendingStudentsCount;
-
     }
 
+    /**
+     * Метод для скрипта. Парсит все команды из файла и выполняет их.
+     * @param filename Имя файла.
+     * @throws IOException в случае ошибки ввода-вывода.
+     * @throws EmptyIOException в случае пустого файла.
+     */
     public void ScriptMode(String filename) throws IOException, EmptyIOException {
         ScriptManager scriptManager = new ScriptManager(filename.trim());
         openedScripts.add(filename.trim());
@@ -132,7 +122,7 @@ public class CommandManager {
     }
 
     /**
-     * Консоль, которая будет выводить информацию о коллекции.
+     * Метод для консоли. Парсит все команды из консоли и выполняет их.
      */
     public void consoleMode() throws IOException, EmptyIOException, EmptyIOException {
         boolean isRunning = true;

@@ -7,6 +7,9 @@ import java.util.Scanner;
 
 import static util.ConsoleManager.PrintError;
 
+/**
+ * Класс для работы с скриптами
+ */
 public class ScriptManager {
     private Scanner scriptReader;
 

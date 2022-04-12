@@ -6,9 +6,16 @@ import java.io.IOException;
 
 import Exception.EmptyIOException;
 
+/**
+ * Команда 'sum_of_expelled_students'. Выводит сумму значений поля expelledStudents для всех элементов коллекции.
+ */
 public class SumOfExpelledStudents implements Command {
     CollectionManager collectionManager;
 
+    /**
+     * Конструктор команды.
+     * @param collectionManager менеджер коллекции.
+     */
     public SumOfExpelledStudents(CollectionManager collectionManager) {
         this.collectionManager = collectionManager;
     }

@@ -5,8 +5,16 @@ import java.io.IOException;
 import util.CollectionManager;
 import static util.ConsoleManager.Print;
 
+/**
+ * Команда 'show'. Выводит на экран все элементы коллекции.
+ */
 public class Show implements Command {
     CollectionManager collectionManager;
+
+    /**
+     * Конструктор команды 'show'.
+     * @param cm объект класса CollectionManager.
+     */
     public Show(CollectionManager cm) {
         this.collectionManager = cm;
     }

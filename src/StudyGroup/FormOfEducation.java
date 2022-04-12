@@ -1,5 +1,8 @@
 package StudyGroup;
 
+/**
+ * Формы обучения.
+ */
 public enum FormOfEducation {
     DISTANCE_EDUCATION,
     FULL_TIME_EDUCATION,

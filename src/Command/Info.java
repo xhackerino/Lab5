@@ -5,8 +5,16 @@ import static util.ConsoleManager.Print;
 
 import java.io.IOException;
 
+/**
+ * Команда 'info'. Выводит информацию о коллекции.
+ */
 public class Info implements Command {
     CollectionManager collectionManager;
+
+    /**
+     * Конструктор команды.
+     * @param cm менеджер коллекции.
+     */
     public Info(CollectionManager cm) {
         this.collectionManager = cm;
     }

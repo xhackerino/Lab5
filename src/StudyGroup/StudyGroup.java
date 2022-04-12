@@ -3,7 +3,7 @@ package StudyGroup;
 import java.time.ZonedDateTime;
 
 /**
- * @author Ilya Rakin ISU 336934
+ * Главный элемент коллекции, описывает одну запись об учебноц группе.
  */
 public class StudyGroup implements Comparable {
     private Long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
@@ -17,15 +17,15 @@ public class StudyGroup implements Comparable {
     private Person groupAdmin; //Поле не мо
 
     /**
-     * @param id ID
-     * @param name Name
-     * @param coordinates Coordinates
-     * @param creationDate Creation Date
-     * @param studentsCount Students Count
-     * @param expelledStudents Expelled Students
-     * @param formOfEducation Form of education
-     * @param semesterEnum Number of semesters
-     * @param groupAdmin Admin of group
+     * @param id ID. Не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
+     * @param name Name. Не может быть null, Строка не может быть пустой
+     * @param coordinates Coordinates. Не может быть null
+     * @param creationDate Creation Date. Не может быть null, Значение этого поля должно генерироваться автоматически
+     * @param studentsCount Students Count. Значение поля должно быть больше 0
+     * @param expelledStudents Expelled Students. Значение поля должно быть больше 0, Поле может быть null
+     * @param formOfEducation Form of education. Поле может быть null
+     * @param semesterEnum Number of semesters. Поле не может быть null
+     * @param groupAdmin Admin of group. Поле не может быть null
      */
     public StudyGroup(Long id, String name, ZonedDateTime creationDate, long studentsCount, Long expelledStudents,
                       FormOfEducation formOfEducation, Semester semesterEnum, Person groupAdmin, Coordinates coordinates) {

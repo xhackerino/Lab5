@@ -10,6 +10,9 @@ import java.io.IOException;
 
 import static util.ConsoleManager.PrintError;
 
+/**
+ * Команда 'remove_by_id'. Удаляет элемент из коллекции по его id.
+ */
 public class RemoveByIdCommand implements Command {
     CollectionManager collectionManager;
     ConsoleManager consoleManager;

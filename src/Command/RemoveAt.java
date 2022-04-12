@@ -7,8 +7,16 @@ import util.CollectionManager;
 
 import static util.ConsoleManager.PrintError;
 
+/**
+ * Команда 'remove_at'. Удаляет элемент из коллекции по индексу.
+ */
 public class RemoveAt implements Command {
     CollectionManager collectionManager;
+
+    /**
+     * Конструктор команды.
+     * @param cm объект класса CollectionManager.
+     */
     public RemoveAt(CollectionManager cm) {
         this.collectionManager = cm;
     }

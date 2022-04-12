@@ -5,8 +5,16 @@ import util.CollectionManager;
 import java.io.IOException;
 import Exception.EmptyIOException;
 
+/**
+ * Команда 'remove_last'. Удаляет последний элемент из коллекции.
+ */
 public class RemoveLast implements Command {
     CollectionManager collectionManager;
+
+    /**
+     * Конструктор команды.
+     * @param cm менеджер коллекции.
+     */
     public RemoveLast(CollectionManager cm){
         this.collectionManager = cm;
     }

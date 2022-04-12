@@ -5,9 +5,18 @@ import util.ConsoleManager;
 
 import java.io.IOException;
 
+/**
+ * Команда 'add'. Добавляет новый элемент в коллекцию.
+ */
 public class AddCommand implements Command {
     CollectionManager collectionManager;
     ConsoleManager consoleManager;
+
+    /**
+     * Конструктор команды.
+     * @param cm менеджер коллекции.
+     * @param csm менеджер консоли.
+     */
     public AddCommand(CollectionManager cm, ConsoleManager csm) {
         this.collectionManager = cm;
         this.consoleManager = csm;

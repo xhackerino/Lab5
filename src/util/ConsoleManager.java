@@ -15,21 +15,42 @@ import java.util.Arrays;
 import java.util.EmptyStackException;
 import java.util.Scanner;
 
+/**
+ * Менеджер консоли
+ */
 public class ConsoleManager {
     private Scanner scanner;
 
+    /**
+     * Ввод данных
+     * @param scanner Сканер для ввода
+     */
     public ConsoleManager(Scanner scanner) {
         this.scanner = scanner;
     }
 
+    /**
+     * Вывод на экран
+     * @param message Сообщение
+     */
     public static void Print(String message) {
         System.out.println(message);
     }
 
+    /**
+     * Вывод на экран
+     * @param message Сообщение об ошибке
+     */
     public static void PrintError(String message) {
         System.out.println("Error: " + message);
     }
 
+    /**
+     * Аскер для нового элемента
+     * @param Id Идентификатор
+     * @return Новый элемент
+     * @throws IOException Ошибка ввода
+     */
     public StudyGroup askGroup(Long Id) throws IOException {
         Print("id = " + Id);
         String name = parseString("Введите имя:");

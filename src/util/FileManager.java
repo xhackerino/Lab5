@@ -17,11 +17,18 @@ import java.util.Stack;
 import static util.ConsoleManager.Print;
 import static util.ConsoleManager.PrintError;
 
+/**
+ * Класс для работы с файлами
+ */
 public class FileManager {
     private String fileName;
     private static ArrayList<String> fields;
     private static ArrayList<String> keys;
 
+    /**
+     * Метод для получения имени файла
+     * @param fileName имя файла
+     */
     public FileManager(String fileName) {
         this.fileName = fileName;
     }
@@ -41,6 +48,11 @@ public class FileManager {
         fields.add(word);
     }
 
+    /**
+     * Метод для записи коллекции в файл
+     * @param stack коллекция
+     * @throws IOException ошибка доступа к файлу
+     */
     public void WriteCollection(Stack<StudyGroup> stack) throws IOException {
         if (fileName == null) {
             PrintError("Нельзя сохранять");
@@ -65,6 +77,11 @@ public class FileManager {
         }
     }
 
+    /**
+     * Метод для считывания коллекции из файла
+     * @return коллекция
+     * @throws IOException ошибка доступа к файлу
+     */
     public Stack<StudyGroup> ReadCollection() throws IOException {
         if (fileName == null) {
             return new Stack<StudyGroup>();
@@ -80,7 +97,7 @@ public class FileManager {
             Print("Коллекция загружена");
             return stack;
         } catch (FileNotFoundException e) {
-            PrintError("Файл не найден");
+            PrintError("Файл коллекции не найден");
         } catch (NoSuchElementException e) {
             PrintError("Загрузочный файл пуст");
         } catch (IOException e) {
@@ -88,7 +105,6 @@ public class FileManager {
         }
         return new Stack<>();
     }
-
     private StudyGroup studyGroupFromCSV(String line) {
         String word = "";
         Long id = null;
@@ -178,6 +194,11 @@ public class FileManager {
         return studyGroup;
     }
 
+    /**
+     * Метод для выбора поля из коллекции
+     * @param i номер поля
+     * @return номер поля
+     */
     private static int Chooser(int i) {
         if (fields.get(i).equals("ID")) {
             return 1;

@@ -11,7 +11,9 @@ import Exception.EmptyIOException;
 import static util.ConsoleManager.Print;
 
 /**
+ * Главный класс программы. Запускает программу.
  * @author Ilya Rakin ISU 336934
+ *
  */
 public class Main {
     public static void main(String[] args) throws IOException, EmptyIOException {
@@ -43,8 +45,6 @@ public class Main {
             } catch (Exception e) {
                 break;
             }
-//            public void func ( boolean a1, boolean a2, boolean a3, boolean a4){
-//            }
         }
     }
 }

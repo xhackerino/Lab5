@@ -6,9 +6,16 @@ import Exception.EmptyIOException;
 import util.CollectionManager;
 import static util.ConsoleManager.Print;
 
+/**
+ * Команда 'clear'. Очищает коллекцию.
+ */
 public class Clear implements Command {
     CollectionManager collectionManager;
 
+    /**
+     * Конструктор команды.
+     * @param cm менеджер коллекции.
+     */
     public Clear(CollectionManager cm) {
         this.collectionManager = cm;
     }
