@@ -3,25 +3,20 @@ package util;
 import StudyGroup.StudyGroup;
 
 import java.io.IOException;
-import java.time.ZonedDateTime;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.Objects;
 import java.util.Stack;
-import java.util.Comparator;
 
-import static java.lang.Math.abs;
 import static util.ConsoleManager.Print;
 import static util.ConsoleManager.PrintError;
-//import static util.FileManager.ReadCollection;
-//import static util.FileManager.WriteCollection;
 
 /**
  * Класс, объект которого хранит в себе коллекцию и управляет ей.
  */
 public class CollectionManager {
-    private Stack<StudyGroup> studyGroup;
-    private FileManager fileManager;
-    private java.time.ZonedDateTime currTime;
+    private final Stack<StudyGroup> studyGroup;
+    private final FileManager fileManager;
+    private final java.time.ZonedDateTime currTime;
 
     /**
      * Конструктор класса CollectionManager
@@ -31,13 +26,10 @@ public class CollectionManager {
      */
 
     public CollectionManager(FileManager fm) throws IOException {
-//        loadCollection();
-//        saveCollection();
         this.fileManager = fm;
         studyGroup = fileManager.ReadCollection();
         currTime = java.time.ZonedDateTime.now();
-        ;
-        System.out.println("Для получения списка команд введите help");
+        System.out.println("Enter 'help' to see all the commands");
     }
     public Stack<StudyGroup> getStudyGroup() {
         return studyGroup;
@@ -48,9 +40,9 @@ public class CollectionManager {
      * @return возвращает информацию о коллекции
      */
     public String getInfo() {
-        return "Коллекция типа Stack из элементов StudyGroup"
-                + ", дата инициализации: " + currTime.toString()
-                + ", количество элементов в коллекции: " + (studyGroup.size());
+        return "Collection with type Stack of StudyGroup elements"
+                + ", date of initialization: " + currTime.toString()
+                + ", number of elements in the collection: " + (studyGroup.size());
     }
 
     /**
@@ -68,11 +60,10 @@ public class CollectionManager {
     /**
      * Метод для добавления элемента в коллекцию.
      * @param sg объект класса StudyGroup
-     * @throws IOException исключение возникающее при ошибке чтения или записи в файл
      */
-    public void add(StudyGroup sg) throws IOException {
+    public void add(StudyGroup sg) {
         studyGroup.add(sg);
-        Print("Элемент добавлен");
+        Print("Element added");
 //        Print(studyGroup.toString()+"\n");
     }
 
@@ -106,9 +97,8 @@ public class CollectionManager {
     /**
      * Метод для обновления значений элемента коллекции.
      * @param sg объект класса StudyGroup.
-     * @throws IOException исключение возникающее при ошибке чтения или записи в файл
      */
-    public void updateElement(StudyGroup sg) throws IOException {
+    public void updateElement(StudyGroup sg) {
         for (StudyGroup group : studyGroup) {
             if (Objects.equals(group.getId(), sg.getId())) {
 //                Collections.replaceAll(studyGroup, group, sg);
@@ -121,7 +111,7 @@ public class CollectionManager {
                 group.setFormOfEducation(sg.getFormOfEducation());
                 group.setSemesterEnum(sg.getSemesterEnum());
                 group.setGroupAdmin(sg.getGroupAdmin());
-                Print("Элемент обновлен");
+                Print("Element has been updated");
 //                Print(studyGroup.toString());
             }
         }
@@ -130,13 +120,12 @@ public class CollectionManager {
     /**
      * Метод для удаления элемента по ID.
      * @param id идентификатор
-     * @throws IOException исключение возникающее при ошибке чтения или записи в файл
      */
-    public void removeElement(Long id) throws IOException {
+    public void removeElement(Long id) {
         for (StudyGroup group : studyGroup) {
             if (Objects.equals(group.getId(), id)) {
                 studyGroup.remove(group);
-                Print("Элемент удален");
+                Print("Element removed");
 //                Print(studyGroup.toString());
             }
         }
@@ -144,46 +133,42 @@ public class CollectionManager {
 
     /**
      * Метод для сохранения коллекции в файл.
-     * @throws IOException исключение возникающее при ошибке чтения или записи в файл
      */
-    public void save() throws IOException {
+    public void save() {
         fileManager.WriteCollection(studyGroup);
-        Print("Коллекция сохранена");
+        Print("Collection saved");
     }
 
     /**
      * Метод очищающий коллекцию.
-     * @throws IOException исключение возникающее при ошибке чтения или записи в файл
      */
-    public void clear() throws IOException {
+    public void clear() {
         if (studyGroup.size() > 0) {
             studyGroup.clear();
         } else {
-            Print("Коллекция очищена");
+            Print("Collection cleared");
         }
 //        Print(studyGroup.toString());
     }
 
     /**
      * Метод выхода из программы.
-     * @throws IOException исключение возникающее при ошибке чтения или записи в файл
      */
-    public void exit() throws IOException {
-        Print("Завершение программы. Прощайте...");
+    public void exit() {
+        Print("Ending of program. Bye, bye...");
         System.exit(0);
     }
 
     /**
      * Метод удаления элемента по индексу.
      * @param index индекс
-     * @throws IOException исключение возникающее при ошибке чтения или записи в файл
      */
-    public void removeByIndex(int index) throws IOException {
+    public void removeByIndex(int index) {
         int indeks = 0;
         for (StudyGroup group : studyGroup) {
             if (indeks == index) {
                 studyGroup.remove(group);
-                Print("Элемент удален");
+                Print("Element removed");
                 break;
             } else {
                 indeks++;
@@ -193,19 +178,17 @@ public class CollectionManager {
 
     /**
      * Метод удаления последнего элемента коллекции.
-     * @throws IOException исключение возникающее при ошибке чтения или записи в файл
      */
-    public void removeLast() throws IOException {
+    public void removeLast() {
         studyGroup.remove(studyGroup.size() - 1);
-        Print("Элемент удален");
+        Print("Element removed");
     }
 
     /**
      * Метод удалить все элементы больше заданного
      * @param index индекс
-     * @throws IOException исключение возникающее при ошибке чтения или записи в файл
      */
-    public void removeAllGreater(int index) throws IOException {
+    public void removeAllGreater(int index) {
         int indeks = studyGroup.size();
         System.out.println("indeks" + indeks);
         System.out.println("index" + index);
@@ -216,67 +199,60 @@ public class CollectionManager {
         int bomj = 0;
         String induks = Integer.toString(indeks);
         for (StudyGroup group : studyGroup) {
-//            if (group.getId().compareTo(sg.getId()) > 0) {
             if (index < indeks) {
                 if (bomj < delete) {
                     System.out.println("bomj" + bomj);
                     System.out.println("delete" + delete);
                     studyGroup.remove(group);
-                    Print("Элемент удален");
+                    Print("Element removed");
                     delete--;
                     System.out.println("deleteNEW" + delete);
                 } else {
                     bomj++;
                 }
 //                Print("Элемент удален");
-//                Print(studyGroup.toString());
             }
         }
     }
 
     /**
      * Метод подсчета суммы отчисленных студентов.
-     * @throws IOException исключение возникающее при ошибке чтения или записи в файл
      */
-    public void sumOfExpelledStudents() throws IOException {
+    public void sumOfExpelledStudents() {
         int sum = 0;
         for (StudyGroup group : studyGroup) {
             sum += group.getExpelledStudents();
         }
-        Print("Сумма выбранных элементов: " + sum);
+        Print("Sum of selected elements: " + sum);
     }
 
     /**
      * Метод вывода элементов, значение поля name которых начинаются с заданной подстроки
      * @param name имя в поле name
-     * @return элементы, удовлетворяющие условиям
-     * @throws IOException исключение возникающее при ошибке чтения или записи в файл
      */
-    public String filterStartsWithName(String name) throws IOException {
+    public void filterStartsWithName(String name) {
         String fswn = "";
         for (StudyGroup group : studyGroup) {
             if (name.equals("") || name == null) {
-                PrintError("Имя не может начинаться с пустоты");
+                PrintError("Name can't be empty");
                 break;
             } else if (group.getName().startsWith(name.trim())) {
-                fswn += group.toString() + "\n";
-                Print("Элементы, значения поля 'имя' которых начинается с " + "'" + name + "'");
+                fswn += group + "\n";
+                Print("Elements, which 'name' field starts with " + "'" + name + "'");
                 Print(fswn);
             }
         }
         if (fswn.equals("")) {
-            Print("Элементов, подходящих под условия, в коллекции нет, попробуйте другие варианты");
+            Print("There are no elements matching the conditions in the collection, try other options");
         }
-        return fswn;
     }
 
     /**
      * Метод вывода значений поля StudentsCoubt всех элементов в порядке возрастания
-     * @throws IOException исключение возникающее при ошибке чтения или записи в файл
      */
-    public void printFieldAscendingStudentsCount() throws IOException {
+    public void printFieldAscendingStudentsCount() {
         studyGroup.sort(Comparator.comparing(StudyGroup::getStudentsCount));
-        Print("Коллекция отсортирована по полю studentsCount по возрастанию");
+        Print("The collection is sorted by the field 'StudentsCount' in ascending order");
 //        Print(studyGroup.toString());
     }
 }

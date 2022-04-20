@@ -27,13 +27,13 @@ public class Clear implements Command {
 
     @Override
     public String getDescription() {
-        return " : очистить коллекцию";
+        return " : clears the collection";
     }
 
     @Override
     public boolean execute(String arg) throws IOException, EmptyIOException {
         collectionManager.clear();
-        Print("Коллекция очищена");
+        Print("Collection cleared");
         return true;
     }
 }

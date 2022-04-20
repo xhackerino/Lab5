@@ -27,7 +27,7 @@ public class SumOfExpelledStudents implements Command {
 
     @Override
     public String getDescription() {
-        return " : вывести сумму значений поля expelledStudents для всех элементов коллекции";
+        return " : prints the sum of the expelledStudents field of all elements in the collection.";
     }
 
     @Override

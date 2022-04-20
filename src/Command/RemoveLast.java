@@ -25,7 +25,7 @@ public class RemoveLast implements Command {
 
     @Override
     public String getDescription() {
-        return " : удалить последний элемент из коллекции";
+        return " : removes the last element of the collection";
     }
 
     @Override

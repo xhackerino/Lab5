@@ -25,7 +25,7 @@ public class PrintFieldAscendingStudentsCount implements Command {
 
     @Override
     public String getDescription() {
-        return " : вывести значения поля studentsCount всех элементов в порядке возрастания";
+        return " : prints the values of the studentsCount field of all elements in ascending order";
     }
 
     @Override

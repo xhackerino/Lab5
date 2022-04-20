@@ -12,7 +12,6 @@ import Exception.EmptyIOException;
  */
 public class RemoveGreater implements Command {
     CollectionManager collectionManager;
-    ConsoleManager consoleManager;
     int index;
 
     /**
@@ -30,7 +29,7 @@ public class RemoveGreater implements Command {
 
     @Override
     public String getDescription() {
-        return " {element} : удалить из коллекции все элементы, превышающие заданный";
+        return " {element} : removes all elements greater than {element} from the collection";
     }
 
     @Override

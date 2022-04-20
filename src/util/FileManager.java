@@ -21,7 +21,7 @@ import static util.ConsoleManager.PrintError;
  * Класс для работы с файлами
  */
 public class FileManager {
-    private String fileName;
+    private final String fileName;
     private static ArrayList<String> fields;
     private static ArrayList<String> keys;
 
@@ -35,8 +35,8 @@ public class FileManager {
 
     private static void MakeFieldsArray(String line) {
         String word = "";
-        fields = new ArrayList<String>();
-        keys = new ArrayList<String>();
+        fields = new ArrayList<>();
+        keys = new ArrayList<>();
         for (int i = 0; i < line.length(); i++) {
             if (line.charAt(i) != ';') {
                 word += line.charAt(i);
@@ -51,11 +51,10 @@ public class FileManager {
     /**
      * Метод для записи коллекции в файл
      * @param stack коллекция
-     * @throws IOException ошибка доступа к файлу
      */
-    public void WriteCollection(Stack<StudyGroup> stack) throws IOException {
+    public void WriteCollection(Stack<StudyGroup> stack) {
         if (fileName == null) {
-            PrintError("Нельзя сохранять");
+            PrintError("Can't be saved");
             return;
         }
         try {
@@ -73,18 +72,17 @@ public class FileManager {
             }
             fos.write(stek.getBytes());
         } catch (IOException e) {
-            PrintError("Файл не найден");
+            PrintError("File not found");
         }
     }
 
     /**
      * Метод для считывания коллекции из файла
      * @return коллекция
-     * @throws IOException ошибка доступа к файлу
      */
-    public Stack<StudyGroup> ReadCollection() throws IOException {
+    public Stack<StudyGroup> ReadCollection() {
         if (fileName == null) {
-            return new Stack<StudyGroup>();
+            return new Stack<>();
         }
         try {
             Stack<StudyGroup> stack = new Stack<>();
@@ -94,17 +92,18 @@ public class FileManager {
                 stack.add(studyGroupFromCSV(reader.readLine()));
             }
             reader.close();
-            Print("Коллекция загружена");
+            Print("Collection was loaded");
             return stack;
         } catch (FileNotFoundException e) {
-            PrintError("Файл коллекции не найден");
+            PrintError("Collection not found");
         } catch (NoSuchElementException e) {
-            PrintError("Загрузочный файл пуст");
+            PrintError("File is empty");
         } catch (IOException e) {
-            PrintError("Ошибка доступа к файлу");
+            PrintError("Error with access to file");
         }
         return new Stack<>();
     }
+
     private StudyGroup studyGroupFromCSV(String line) {
         String word = "";
         Long id = null;
@@ -116,10 +115,9 @@ public class FileManager {
         Long expelledStudents = null;
         FormOfEducation formOfEducation = null;
         Semester semesterEnum = null;
-        Person groupAdmin = null;
-        StudyGroup studyGroup = new StudyGroup();
-        Person person = new Person();
-        Coordinates coordinates = new Coordinates();
+        Person groupAdmin;
+        StudyGroup studyGroup;
+        Coordinates coordinates;
         String personName = null;
         String personPassportId = null;
         Color eyeColor = null;

@@ -18,37 +18,15 @@ public class Coordinates {
     }
     public Coordinates(){}
     /**
-     *
-     * @throws IllegalArgumentException if any parameter is not correct...
+     * @return X координата. Не может быть null
+     * @throws IllegalArgumentException если поле не может быть null
      */
     public Long getX() {
         return x;
     }
-    /**
-     *
-     * @param x X coordinate. X cannot be null
-     */
-    public void setX(Long x) {
-        if (x == null) {
-            throw new IllegalArgumentException("X cannot be null");
-        } else {
-            this.x = x;
-        }
-    }
 
     public double getY() {
         return y;
-    }
-    /**
-     *
-     * @param y Y coordinate. Y should be greater than '-352'
-     */
-    public void setY(double y) {
-        if (y<=-352) {
-            throw new IllegalArgumentException("Y should be greater than '-352'");
-        } else {
-            this.y = y;
-        }
     }
 
     @Override

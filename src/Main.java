@@ -1,22 +1,22 @@
-import StudyGroup.StudyGroup;
+import Command.*;
+import util.CollectionManager;
+import util.CommandManager;
+import util.ConsoleManager;
 import util.FileManager;
 
-import java.io.*;
-import java.util.*;
-
-import util.*;
-import Command.*;
-import Exception.EmptyIOException;
+import java.io.PrintStream;
+import java.util.Scanner;
 
 import static util.ConsoleManager.Print;
 
 /**
  * Главный класс программы. Запускает программу.
  * @author Ilya Rakin ISU 336934
- *
+ * рекурсия не вылетала
+ * обработка пробелов
  */
 public class Main {
-    public static void main(String[] args) throws IOException, EmptyIOException {
+    public static void main(String[] args) {
         boolean success = false;
         while (!success) {
             try {
@@ -24,16 +24,16 @@ public class Main {
 //        FileManager.WriteCollection("C:\\Users\\rakin\\IdeaProjects\\Lab5-master\\ilya_writing.csv", jopa);
                 System.out.println("Hello, World!");
                 String file_name = "FILE_NAME";
-//        System.setOut(new PrintStream(System.out, true, "UTF-8"));
+                System.setOut(new PrintStream(System.out, true, "UTF-8"));
                 if (System.getenv(file_name) == null) {
-                    Print("Нет переменной с загрузочным файлом");
+                    Print("No file name specified.\n");
                 }
                 String fileName = System.getenv(file_name);
                 FileManager fm = new FileManager(fileName);
                 Scanner scanner = new Scanner(System.in);
                 ConsoleManager consoleManager = new ConsoleManager(scanner);
                 CollectionManager collectionManager = new CollectionManager(fm);
-                System.out.println("Введите Вашу команду...");
+                System.out.println("Enter your command: ");
                 CommandManager commandManager = new CommandManager(consoleManager, collectionManager, scanner, new Command[]{
                         new AddCommand(collectionManager, consoleManager), new Clear(collectionManager), new Exit(collectionManager),
                         new FilterStartsWithName(collectionManager), new Info(collectionManager), new PrintFieldAscendingStudentsCount(collectionManager),

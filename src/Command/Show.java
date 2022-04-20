@@ -1,8 +1,9 @@
 package Command;
-import util.*;
+
+import util.CollectionManager;
 
 import java.io.IOException;
-import util.CollectionManager;
+
 import static util.ConsoleManager.Print;
 
 /**
@@ -25,12 +26,12 @@ public class Show implements Command {
 
     @Override
     public String getDescription() {
-        return " : вывести в стандартный поток вывода все элементы коллекции в строковом представлении";
+        return " : prints all elements of the collection in string representation";
     }
 
     @Override
     public boolean execute(String arg) throws IOException {
-        Print("Все элементы коллекции:");
+        Print("All elements of the collection: ");
         Print(collectionManager.show());
         return true;
     }

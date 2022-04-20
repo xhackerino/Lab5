@@ -13,7 +13,6 @@ public class Exit implements Command {
     /**
      * Конструктор команды.
      * @param cm менеджер коллекции.
-     * @throws EmptyIOException если коллекция пуста.
      */
     public Exit(CollectionManager cm) {
         this.collectionManager = cm;
@@ -25,7 +24,7 @@ public class Exit implements Command {
 
     @Override
     public String getDescription() {
-        return " : завершить программу (без сохранения в файл)";
+        return " : end of program (without saving)";
     }
 
     @Override

@@ -1,9 +1,9 @@
 package Command;
 
-import java.io.IOException;
 import Exception.EmptyIOException;
-import StudyGroup.StudyGroup;
 import util.CollectionManager;
+
+import java.io.IOException;
 
 import static util.ConsoleManager.PrintError;
 
@@ -27,7 +27,7 @@ public class RemoveAt implements Command {
 
     @Override
     public String getDescription() {
-        return " index : удалить элемент, находящийся в заданной позиции коллекции (index)";
+        return " index : removes the element at the given position in the collection (index)";
     }
 
     @Override
@@ -37,18 +37,18 @@ public class RemoveAt implements Command {
             if (arg.trim().equals("")) throw new EmptyIOException();
             index = Integer.parseInt(arg.trim());
         } catch (NumberFormatException e) {
-            PrintError("Индекс должен быть целым числом");
+            PrintError("index must be an integer");
             return true;
         } catch (EmptyIOException e) {
-            PrintError("Индекс не может быть пустым");
+            PrintError("index must be non-empty");
             return true;
         }
         if (index < 0) {
-            PrintError("Индекс не может быть меньше 0");
+            PrintError("index must be non-negative");
             return true;
         }
         if (collectionManager.getStudyGroup().size() < index) {
-            PrintError("Индекс не должен быть больше количества элементов в коллекции");
+            PrintError("index must be less than the size of the collection");
         }
         collectionManager.removeByIndex(index);
         return true;

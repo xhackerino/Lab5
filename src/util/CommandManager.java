@@ -1,15 +1,12 @@
 package util;
 
-import Command.*;
+import Command.Command;
+import Exception.EmptyIOException;
 
 import java.io.IOException;
-import Exception.EmptyIOException;
-import java.nio.file.NoSuchFileException;
-import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.Stack;
-import Command.*;
 
 import static util.ConsoleManager.Print;
 import static util.ConsoleManager.PrintError;
@@ -21,26 +18,11 @@ public class CommandManager {
     /**
      * Поля, содержащие объекты команд.
      */
-    private Scanner scanner;
-    private Command[] commands;
-    private CollectionManager collectionManager;
-    private ConsoleManager consoleManager;
-    private Stack<String> openedScripts;
-//    private final Info info;
-//    private final Show show;
-//    private final AddCommand add;
-//    private final UpdateIdCommand updateId;
-//    private final RemoveByIdCommand removeById;
-//    private final Clear clear;
-//    private final SaveCommand save;
-//    private final Exit exit;
-//    private final RemoveAt removeAt;
-//    private final RemoveLast removeLast;
-//    private final RemoveGreater removeGreater;
-//    private final SumOfExpelledStudents sumOfExpelledStudents;
-//    private final FilterStartsWithName filterStartsWithName;
-//    private final PrintFieldAscendingStudentsCount printFieldAscendingStudentsCount;
-
+    private final Scanner scanner;
+    private final Command[] commands;
+    private final CollectionManager collectionManager;
+    private final ConsoleManager consoleManager;
+    private final Stack<String> openedScripts;
     /**
      * Конструктор менеджера. Автоматически инициализирует объекты всех команд при создании и менеджера коллекций.
      *
@@ -48,25 +30,19 @@ public class CommandManager {
      * @param collection Менеджер коллекций.
      * @param scanner    Сканер команд.
      * @param commands   Список команд.
-     * @throws IOException в случае ошибки ввода-вывода.
      * @see CollectionManager Менеджер коллекций.
      */
-//    public CommandManager(Scanner scanner, Command[] commands, CollectionManager collection,
-//                          ConsoleManager console, Info info, Show show, AddCommand add, UpdateIdCommand updateId, RemoveByIdCommand removeById,
-//                          Clear clear, SaveCommand save, Exit exit, RemoveAt removeAt, RemoveLast removeLast, RemoveGreater removeGreater,
-//    SumOfExpelledStudents sumOfExpelledStudents, FilterStartsWithName filterStartsWithName, PrintFieldAscendingStudentsCount printFieldAscendingStudentsCount) throws IOException {
     public CommandManager(ConsoleManager console, CollectionManager collection, Scanner scanner, Command[] commands) {
         consoleManager = console;
         collectionManager = collection;
-        openedScripts = new Stack<String>();
         this.scanner = scanner;
         this.commands = commands;
-        openedScripts = new Stack<String>();
+        openedScripts = new Stack<>();
     }
 
     /**
      * Метод для скрипта. Парсит все команды из файла и выполняет их.
-     * @param filename Имя файла.
+     * @param filename имя файла.
      * @throws IOException в случае ошибки ввода-вывода.
      * @throws EmptyIOException в случае пустого файла.
      */
@@ -86,12 +62,12 @@ public class CommandManager {
             } else if (cmd[0].trim().equals("execute_script")) {
                 if (!cmd[1].trim().equals("")) {
                     if (openedScripts.contains(cmd[1].trim())) {
-                        PrintError("Скрипт уже открыт");
+                        PrintError("Script is already opened.");
                     } else {
                         ScriptMode(cmd[1].trim());
                     }
                 } else {
-                    PrintError("Не указан путь к скрипту");
+                    PrintError("There is no script name.");
                 }
             } else if (!cmd[0].trim().equals("")) {
                 boolean commandFound = false;
@@ -103,7 +79,7 @@ public class CommandManager {
                                 isRunning = comnd.execute(cmd[1].trim());
                                 commandFound = true;
                             } catch (NoSuchElementException e) {
-                                PrintError("Не указаны все параметры");
+                                PrintError("Not enough parameters.");
                             }
                             consoleManager.ChangeScanner(new Scanner(System.in));
                         } else {
@@ -114,25 +90,27 @@ public class CommandManager {
                     }
                 }
                 if (!commandFound) {
-                    PrintError("Команда:" + cmd[0] + " " + cmd[1] + " не найдена");
+                    PrintError(cmd[0] + " " + "'" + cmd[1] + "'" + " command not found.");
                 }
             }
         }
-        Print("Скрипт завершен");
+        Print("Script " + filename + " finished.");
     }
 
     /**
      * Метод для консоли. Парсит все команды из консоли и выполняет их.
+     * @throws IOException в случае ошибки ввода-вывода.
+     * @throws EmptyIOException в случае пустого файла.
      */
-    public void consoleMode() throws IOException, EmptyIOException, EmptyIOException {
+    public void consoleMode() throws IOException, EmptyIOException {
         boolean isRunning = true;
         while (isRunning) {
             String[] cmd = (scanner.nextLine().trim() + " ").split(" ", 2);
             if (cmd[0].trim().equals("help")) {
-                Print("help : вывод справки по доступным командам");
-                Print("execute_script file_name : считать и исполнить скрипт из указанного файла, " +
-                        "в скрипте содержатся команды в таком же виде, в котором их вводит " +
-                        "пользователь в интерактивном режиме.");
+                Print("help : prints available commands.");
+                Print("execute_script file_name : reads and executes script from the specified file, " +
+                        "the script contains commands in the same form in which they are entered " +
+                        "by the user in the console.");
                 for (Command comnd : commands) {
                     Print(comnd.getName() + comnd.getDescription());
                 }
@@ -141,7 +119,7 @@ public class CommandManager {
                     ScriptMode(cmd[1].trim());
                     openedScripts.clear();
                 } else {
-                    PrintError("Введите имя файла");
+                    PrintError("Enter script name.");
                 }
             } else if (!cmd[0].trim().equals("")) {
                 boolean commandFound = false;
@@ -153,7 +131,7 @@ public class CommandManager {
                     }
                 }
                 if (!commandFound) {
-                    PrintError("Команда не найдена");
+                    PrintError("Command '" + cmd[0] + "' not found.");
                 }
             }
         }

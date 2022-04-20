@@ -28,7 +28,7 @@ public class UpdateIdCommand implements Command {
 
     @Override
     public String getDescription() {
-        return " id {element} : обновить значение элемента коллекции, id которого равен заданному";
+        return " id {element} : update the value of the collection element whose id is equal to the given one";
     }
 
     @Override
@@ -38,14 +38,14 @@ public class UpdateIdCommand implements Command {
             if (arg.trim().equals("")) throw new EmptyIOException();
             id = Long.parseLong(arg.trim());
         } catch (NumberFormatException e) {
-            PrintError("ID должен быть целым числом");
+            PrintError("id must be an integer");
             return true;
         } catch (EmptyIOException e) {
-            PrintError("ID не может быть пустым");
+            PrintError("id mustn't be empty");
             return true;
         }
         if (!collectionManager.checkId(id)) {
-            PrintError("Элемент с таким id не найден");
+            PrintError("There is no element with such id");
             return true;
         }
         StudyGroup group = consoleManager.askGroup(collectionManager.nextId());

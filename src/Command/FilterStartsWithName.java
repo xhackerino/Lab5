@@ -25,7 +25,7 @@ public class FilterStartsWithName implements Command{
 
     @Override
     public String getDescription() {
-        return " name : вывести элементы, значение поля name которых начинается с заданной подстроки";
+        return " name : print elements, which 'name' field value starts with the given substring";
     }
 
     @Override

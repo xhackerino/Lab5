@@ -3,7 +3,7 @@ package StudyGroup;
 import java.time.ZonedDateTime;
 
 /**
- * Главный элемент коллекции, описывает одну запись об учебноц группе.
+ * Главный элемент коллекции, описывает одну запись об учебной группе.
  */
 public class StudyGroup implements Comparable {
     private Long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
@@ -205,16 +205,16 @@ public class StudyGroup implements Comparable {
 
     @Override
     public String toString() {
-        return "Учебная группа {" +
+        return "Study group {" +
                 "id=" + id +
-                ", имя ='" + name + '\'' +
-                ", координаты = " + coordinates +
-                ", дата создания = " + creationDate +
-                ", количество студентов = " + studentsCount +
-                ", отчисленных студентов = " + expelledStudents +
-                ", форма обучения = " + formOfEducation +
-                ", семестр = " + semesterEnum +
-                ", админ группы = " + groupAdmin +
+                ", name ='" + name + '\'' +
+                ", Coordinates = " + coordinates +
+                ", date of creation = " + creationDate +
+                ", number of students = " + studentsCount +
+                ", number of expelled students = " + expelledStudents +
+                ", form of education = " + formOfEducation +
+                ", semester = " + semesterEnum +
+                ", admin of group = " + groupAdmin +
                 '}';
     }
 

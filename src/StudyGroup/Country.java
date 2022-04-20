@@ -8,5 +8,5 @@ public enum Country {
     FRANCE,
     SPAIN,
     INDIA,
-    SOUTH_KOREA;
+    SOUTH_KOREA
 }

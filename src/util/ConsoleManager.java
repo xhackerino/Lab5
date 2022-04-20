@@ -1,18 +1,10 @@
 package util;
-import java.time.ZonedDateTime;
 
-import StudyGroup.StudyGroup;
-import StudyGroup.FormOfEducation;
-import StudyGroup.Semester;
-import StudyGroup.Color;
-import StudyGroup.Country;
-import StudyGroup.Coordinates;
-import StudyGroup.Person;
-import java.io.IOException;
 import Exception.EmptyIOException;
+import StudyGroup.*;
 
+import java.time.ZonedDateTime;
 import java.util.Arrays;
-import java.util.EmptyStackException;
 import java.util.Scanner;
 
 /**
@@ -47,44 +39,43 @@ public class ConsoleManager {
 
     /**
      * Аскер для нового элемента
-     * @param Id Идентификатор
+     * @param Id идентификатор
      * @return Новый элемент
-     * @throws IOException Ошибка ввода
      */
-    public StudyGroup askGroup(Long Id) throws IOException {
-        Print("id = " + Id);
-        String name = parseString("Введите имя:");
+    public StudyGroup askGroup(Long Id) {
+        Print("Your id = " + Id);
+        String name = parseString("Enter group name:");
         java.time.ZonedDateTime creationDate = ZonedDateTime.now();
         long stdCnt;
         while (true) {
-            stdCnt = parseLong("Введите количество студентов:");
+            stdCnt = parseLong("Enter number of students in group:");
             if (stdCnt < 0) {
-                PrintError("Количество студентов не может быть отрицательным");
+                PrintError("Number of students must be non-negative");
             } else {
                 break;
             }
         }
         long xpdStd;
         while (true) {
-            xpdStd = parseLong("Введите количество отчисленных студентов:");
+            xpdStd = parseLong("Enter number of expelled students:");
             if (xpdStd < 0) {
-                PrintError("Количество отчисленных студентов не может быть отрицательным");
+                PrintError("Number of expelled students must be non-negative");
             } else {
                 break;
             }
         }
-        FormOfEducation foe = parseFormOfEducation("Введите форму обучения");
-        Semester sem = parseSemester("Введите семестр");
-        String grAdm = parseString("Введите имя админа:");
-        String passId = parseString("Введите номер пасспорта:");
-        Color color = parseColor("Введите цвет");
-        Country nazi = parseCountry("Введите национальность");
-        Long x = parseLong("Введите координату x:");
+        FormOfEducation foe = parseFormOfEducation("Enter form of education");
+        Semester sem = parseSemester("Enter semester");
+        String grAdm = parseString("Enter group admin's name:");
+        String passId = parseString("Enter passport ID:");
+        Color color = parseColor("Enter color:");
+        Country nazi = parseCountry("Enter nationality");
+        Long x = parseLong("Enter X coordinate:");
         double y;
         while (true) {
-            y = parseDouble("Введите координату y:");
+            y = parseDouble("Enter Y coordinate:");
             if (y < -352) {
-                Print("Error: y должен быть больше -325");
+                Print("Error: y must be greater than -352");
             } else {
                 break;
             }
@@ -104,7 +95,7 @@ public class ConsoleManager {
                     throw new EmptyIOException();
                 str = message2;
             } catch (EmptyIOException e) {
-                PrintError("Ввод не может быть пустым");
+                PrintError("It's an empty string");
             }
         }
         return str;
@@ -121,9 +112,9 @@ public class ConsoleManager {
                     throw new EmptyIOException();
                 out = Long.parseLong(message2);
             } catch (EmptyIOException e) {
-                PrintError("Ввод не может быть пустым");
+                PrintError("It's an empty string");
             } catch (NumberFormatException e) {
-                PrintError("Ввод должен быть числом");
+                PrintError("It's not a number");
             }
         }
         return out;
@@ -140,9 +131,9 @@ public class ConsoleManager {
                     throw new EmptyIOException();
                 outta = Double.parseDouble(message2);
             } catch (EmptyIOException e) {
-                PrintError("Ввод не может быть пустым");
+                PrintError("It's an empty string");
             } catch (NumberFormatException e) {
-                PrintError("Ввод должен быть числом");
+                PrintError("It's not a number");
             }
         }
         return outta;
@@ -152,7 +143,7 @@ public class ConsoleManager {
         while (out == null) {
             try {
                 Print(message);
-                Print("Список семестров:\n" + Arrays.toString(Semester.values()));
+                Print("List of semesters:\n" + Arrays.toString(Semester.values()));
                 String message2 = scanner.nextLine().trim();
                 if (message2.equals(""))
                     throw new EmptyIOException();
@@ -160,9 +151,9 @@ public class ConsoleManager {
                     throw new EmptyIOException();
                 out = Semester.valueOf(message2);
             } catch (EmptyIOException e) {
-                PrintError("Ввод не может быть пустым");
+                PrintError("It's an empty string");
             } catch (IllegalArgumentException e) {
-                PrintError("Элемент должен быть из списка");
+                PrintError("That's not a semester, please, use list of semesters");
             }
         }
         return out;
@@ -172,7 +163,7 @@ public class ConsoleManager {
         while (out == null) {
             try {
                 Print(message);
-                Print("Список форм обучения:\n" + Arrays.toString(FormOfEducation.values()));
+                Print("Forms of education:\n" + Arrays.toString(FormOfEducation.values()));
                 String message2 = scanner.nextLine().trim();
                 if (message2.equals(""))
                     throw new EmptyIOException();
@@ -180,9 +171,9 @@ public class ConsoleManager {
                     throw new EmptyIOException();
                 out = FormOfEducation.valueOf(message2);
             } catch (EmptyIOException e) {
-                PrintError("Ввод не может быть пустым");
+                PrintError("It's an empty string");
             } catch (IllegalArgumentException e) {
-                PrintError("Элемент должен быть из списка");
+                PrintError("Not a form of education, please, use list of forms of education");
             }
         }
         return out;
@@ -192,7 +183,7 @@ public class ConsoleManager {
         while (out == null) {
             try {
                 Print(message);
-                Print("Список цветов:\n" + Arrays.toString(Color.values()));
+                Print("Colors:\n" + Arrays.toString(Color.values()));
                 String message2 = scanner.nextLine().trim();
                 if (message2.equals(""))
                     throw new EmptyIOException();
@@ -200,9 +191,9 @@ public class ConsoleManager {
                     throw new EmptyIOException();
                 out = Color.valueOf(message2);
             } catch (EmptyIOException e) {
-                PrintError("Ввод не может быть пустым");
+                PrintError("It's an empty string");
             } catch (IllegalArgumentException e) {
-                PrintError("Элемент должен быть из списка");
+                PrintError("That's not a color, please, use list of colors");
             }
         }
         return out;
@@ -212,7 +203,7 @@ public class ConsoleManager {
         while (out == null) {
             try {
                 Print(message);
-                Print("Национальность:\n" + Arrays.toString(Country.values()));
+                Print("Nationality\n" + Arrays.toString(Country.values()));
                 String message2 = scanner.nextLine().trim();
                 if (message2.equals(""))
                     throw new EmptyIOException();
@@ -220,9 +211,9 @@ public class ConsoleManager {
                     throw new EmptyIOException();
                 out = Country.valueOf(message2);
             } catch (EmptyIOException e) {
-                PrintError("Ввод не может быть пустым");
+                PrintError("It's an empty string");
             } catch (IllegalArgumentException e) {
-                PrintError("Элемент должен быть из списка");
+                PrintError("That's not a country, please, use list of countries");
             }
         }
         return out;
