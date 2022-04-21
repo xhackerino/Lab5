@@ -1,6 +1,7 @@
 package StudyGroup;
 
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Главный элемент коллекции, описывает одну запись об учебной группе.
@@ -209,7 +210,7 @@ public class StudyGroup implements Comparable {
                 "id=" + id +
                 ", name ='" + name + '\'' +
                 ", Coordinates = " + coordinates +
-                ", date of creation = " + creationDate +
+                ", date of creation = " + DateTimeFormatter.ofPattern("dd/MM/yyyy - hh:mm").format(creationDate) +
                 ", number of students = " + studentsCount +
                 ", number of expelled students = " + expelledStudents +
                 ", form of education = " + formOfEducation +
