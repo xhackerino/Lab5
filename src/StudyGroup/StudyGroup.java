@@ -140,11 +140,11 @@ public class StudyGroup implements Comparable {
     }
 
     /**
-     * @param expelledStudents Number of kicked students must be greater than 0 or not null
+     * @param expelledStudents Number of kicked students must be greater than 0 or null
      */
     public void setExpelledStudents(Long expelledStudents) {
-        if (expelledStudents <= 0 || expelledStudents == null) {
-            throw new IllegalArgumentException("Number of kicked students must be greater than 0 or not null");
+        if (expelledStudents <= 0) {
+            throw new IllegalArgumentException("Number of kicked students must be greater than 0");
         } else {
             this.expelledStudents = expelledStudents;
         }
@@ -158,14 +158,10 @@ public class StudyGroup implements Comparable {
     }
 
     /**
-     * @param formOfEducation Form of students education can't be null
+     * @param formOfEducation Form of students education can be null
      */
     public void setFormOfEducation(FormOfEducation formOfEducation) {
-        if (formOfEducation == null) {
-            throw new IllegalArgumentException("Form of students education can't be null");
-        } else {
-            this.formOfEducation = formOfEducation;
-        }
+        this.formOfEducation = formOfEducation;
     }
 
     /**

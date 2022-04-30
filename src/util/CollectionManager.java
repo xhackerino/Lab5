@@ -54,11 +54,11 @@ public class CollectionManager {
      * @return возвращает коллекцию в консоль в виде строк
      */
     public String show() {
-        String show = "";
+        StringBuilder show = new StringBuilder();
         for (StudyGroup sgp : studyGroup) {
-            show += sgp.toString() + "\n";
+            show.append(sgp.toString()).append("\n");
         }
-        return show;
+        return show.toString();
     }
 
     /**
@@ -142,7 +142,7 @@ public class CollectionManager {
     /**
      * Метод для сохранения коллекции в файл.
      */
-    public void save() {
+    public void save() throws IOException {
         fileManager.WriteCollection(studyGroup);
         Print("Collection saved");
     }
@@ -195,12 +195,12 @@ public class CollectionManager {
 
     /**
      * Метод удалить все элементы больше заданного
+     * @param index индекс
      */
     public void removeAllGreater(int index) {
-        boolean success = false;
         int i = 0;
         int k = 0;
-        while (!success) {
+        while (true) {
             try {
                 if (i > index) {
                     studyGroup.remove(i);
@@ -239,7 +239,7 @@ public class CollectionManager {
     public void filterStartsWithName(String name) {
         String fswn = "";
         for (StudyGroup group : studyGroup) {
-            if (name.equals("") || name == null) {
+            if (name.equals("")) {
                 PrintError("Name can't be empty");
                 break;
             } else if (group.getName().startsWith(name.trim())) {

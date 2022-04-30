@@ -15,6 +15,7 @@ public class ConsoleManager {
 
     /**
      * Ввод данных
+     *
      * @param scanner Сканер для ввода
      */
     public ConsoleManager(Scanner scanner) {
@@ -23,6 +24,7 @@ public class ConsoleManager {
 
     /**
      * Вывод на экран
+     *
      * @param message Сообщение
      */
     public static void Print(String message) {
@@ -31,6 +33,7 @@ public class ConsoleManager {
 
     /**
      * Вывод на экран
+     *
      * @param message Сообщение об ошибке
      */
     public static void PrintError(String message) {
@@ -39,41 +42,50 @@ public class ConsoleManager {
 
     /**
      * Аскер для нового элемента
+     *
      * @param Id идентификатор
      * @return Новый элемент
      */
     public StudyGroup askGroup(Long Id) {
         Print("Your id = " + Id);
         String name = parseString("Enter group name:");
-        java.time.ZonedDateTime creationDate = ZonedDateTime.now();
+        ZonedDateTime creationDate = ZonedDateTime.now();
         long stdCnt;
         while (true) {
-            stdCnt = parseLong("Enter number of students in group:");
-            if (stdCnt < 0) {
-                PrintError("Number of students must be non-negative");
+            stdCnt = parseLong("Enter number of students in group\n" +
+                    "for example '10'\n" +
+                    "number should be integer:");
+            if (stdCnt <= 0) {
+                PrintError("Number of students must be non-negative and non-zero");
             } else {
                 break;
             }
         }
-        long xpdStd;
-        while (true) {
-            xpdStd = parseLong("Enter number of expelled students:");
-            if (xpdStd < 0) {
-                PrintError("Number of expelled students must be non-negative");
-            } else {
-                break;
-            }
-        }
+        Long xpdStd = parseLongXpd("Enter number of expelled students");
+//        if (xpdStd <= 0) {
+//            PrintError("Number of expelled students must be non-negative");
+//        } else {
+//            return null;
+//        }
+//        while (true) {
+//            xpdStd = parseLongXpd("Enter number of expelled students\n" + "for example '10'\n" + "number should be integer:");
+//            if (xpdStd <= 0) {
+//                PrintError("Number of expelled students must be non-negative and non-zero");
+//            } else {
+//                break;
+//            }
+//        }
         FormOfEducation foe = parseFormOfEducation("Enter form of education");
         Semester sem = parseSemester("Enter semester");
-        String grAdm = parseString("Enter group admin's name:");
+        String grAdm = parseString("Enter group admins name \n(for example: 'Alexander'):");
         String passId = parseString("Enter passport ID:");
         Color color = parseColor("Enter color:");
         Country nazi = parseCountry("Enter nationality");
-        Long x = parseLong("Enter X coordinate:");
+        Long x = parseLong("Enter X coordinate \n(for example '7'):");
         double y;
         while (true) {
-            y = parseDouble("Enter Y coordinate:");
+            y = parseDouble("Enter Y coordinate as fractional number or simple number \n (for example '4', '3.7') \n " +
+                    "Y should be greater than -352:");
             if (y < -352) {
                 Print("Error: y must be greater than -352");
             } else {
@@ -83,6 +95,7 @@ public class ConsoleManager {
         return new StudyGroup(Id, name, creationDate, stdCnt,
                 xpdStd, foe, sem, new Person(grAdm, passId, color, nazi), new Coordinates(x, y));
     }
+
     public String parseString(String message) {
         String str = null;
         while (str == null) {
@@ -91,8 +104,6 @@ public class ConsoleManager {
                 String message2 = scanner.nextLine().trim();
                 if (message2.equals(""))
                     throw new EmptyIOException();
-                if (message2 == null)
-                    throw new EmptyIOException();
                 str = message2;
             } catch (EmptyIOException e) {
                 PrintError("It's an empty string");
@@ -100,6 +111,7 @@ public class ConsoleManager {
         }
         return str;
     }
+
     public Long parseLong(String message) {
         Long out = null;
         while (out == null) {
@@ -107,8 +119,6 @@ public class ConsoleManager {
                 Print(message);
                 String message2 = scanner.nextLine().trim();
                 if (message2.equals(""))
-                    throw new EmptyIOException();
-                if (message2 == null)
                     throw new EmptyIOException();
                 out = Long.parseLong(message2);
             } catch (EmptyIOException e) {
@@ -119,6 +129,20 @@ public class ConsoleManager {
         }
         return out;
     }
+
+    public Long parseLongXpd(String message) {
+        Long out = null;
+        try {
+            Print(message);
+            String message2 = scanner.nextLine().trim();
+            out = Long.parseLong(message2);
+        } catch (IllegalArgumentException e) {
+            Print("Empty number of expelled students, but it's ok");
+        }
+        return out;
+    }
+
+
     public Double parseDouble(String message) {
         Double outta = null;
         while (outta == null) {
@@ -126,8 +150,6 @@ public class ConsoleManager {
                 Print(message);
                 String message2 = scanner.nextLine().trim();
                 if (message2.equals(""))
-                    throw new EmptyIOException();
-                if (message2 == null)
                     throw new EmptyIOException();
                 outta = Double.parseDouble(message2);
             } catch (EmptyIOException e) {
@@ -138,6 +160,7 @@ public class ConsoleManager {
         }
         return outta;
     }
+
     public Semester parseSemester(String message) {
         Semester out = null;
         while (out == null) {
@@ -146,8 +169,6 @@ public class ConsoleManager {
                 Print("List of semesters:\n" + Arrays.toString(Semester.values()));
                 String message2 = scanner.nextLine().trim();
                 if (message2.equals(""))
-                    throw new EmptyIOException();
-                if (message2 == null)
                     throw new EmptyIOException();
                 out = Semester.valueOf(message2);
             } catch (EmptyIOException e) {
@@ -158,26 +179,20 @@ public class ConsoleManager {
         }
         return out;
     }
+
     public FormOfEducation parseFormOfEducation(String message) {
         FormOfEducation out = null;
-        while (out == null) {
-            try {
-                Print(message);
-                Print("Forms of education:\n" + Arrays.toString(FormOfEducation.values()));
-                String message2 = scanner.nextLine().trim();
-                if (message2.equals(""))
-                    throw new EmptyIOException();
-                if (message2 == null)
-                    throw new EmptyIOException();
-                out = FormOfEducation.valueOf(message2);
-            } catch (EmptyIOException e) {
-                PrintError("It's an empty string");
-            } catch (IllegalArgumentException e) {
-                PrintError("Not a form of education, please, use list of forms of education");
-            }
+        try {
+            Print(message);
+            Print("Forms of education:\n" + Arrays.toString(FormOfEducation.values()));
+            String message2 = scanner.nextLine().trim();
+            out = FormOfEducation.valueOf(message2);
+        } catch (IllegalArgumentException e) {
+            Print("Not a form of education, please, next time use list of forms of education");
         }
         return out;
     }
+
     public Color parseColor(String message) {
         Color out = null;
         while (out == null) {
@@ -186,8 +201,6 @@ public class ConsoleManager {
                 Print("Colors:\n" + Arrays.toString(Color.values()));
                 String message2 = scanner.nextLine().trim();
                 if (message2.equals(""))
-                    throw new EmptyIOException();
-                if (message2 == null)
                     throw new EmptyIOException();
                 out = Color.valueOf(message2);
             } catch (EmptyIOException e) {
@@ -198,26 +211,20 @@ public class ConsoleManager {
         }
         return out;
     }
+
     public Country parseCountry(String message) {
         Country out = null;
-        while (out == null) {
-            try {
-                Print(message);
-                Print("Nationality\n" + Arrays.toString(Country.values()));
-                String message2 = scanner.nextLine().trim();
-                if (message2.equals(""))
-                    throw new EmptyIOException();
-                if (message2 == null)
-                    throw new EmptyIOException();
-                out = Country.valueOf(message2);
-            } catch (EmptyIOException e) {
-                PrintError("It's an empty string");
-            } catch (IllegalArgumentException e) {
-                PrintError("That's not a country, please, use list of countries");
-            }
+        try {
+            Print(message);
+            Print("Nationality\n" + Arrays.toString(Country.values()));
+            String message2 = scanner.nextLine().trim();
+            out = Country.valueOf(message2);
+        } catch (IllegalArgumentException e) {
+            Print("That's not a country, please, next time use list of countries");
         }
         return out;
     }
+
     public void ChangeScanner(Scanner scanner) {
         this.scanner = scanner;
     }

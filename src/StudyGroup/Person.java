@@ -15,7 +15,7 @@ public class Person {
      * @param name        имя. Не может быть null, строка не пустая
      * @param passportID  Номер паспорта. Не может быть null
      * @param eyeColor    Цвет глаз. Не может быть null
-     * @param nationality Национальность. Не может быть null
+     * @param nationality Национальность. Может быть null
      */
     public Person(String name, String passportID, Color eyeColor, Country nationality) {
         this.name = name;

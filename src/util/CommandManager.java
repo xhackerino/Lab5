@@ -20,21 +20,18 @@ public class CommandManager {
      */
     private final Scanner scanner;
     private final Command[] commands;
-    private final CollectionManager collectionManager;
     private final ConsoleManager consoleManager;
     private final Stack<String> openedScripts;
     /**
      * Конструктор менеджера. Автоматически инициализирует объекты всех команд при создании и менеджера коллекций.
      *
      * @param console    Менеджер консоли.
-     * @param collection Менеджер коллекций.
      * @param scanner    Сканер команд.
      * @param commands   Список команд.
      * @see CollectionManager Менеджер коллекций.
      */
-    public CommandManager(ConsoleManager console, CollectionManager collection, Scanner scanner, Command[] commands) {
+    public CommandManager(ConsoleManager console, Scanner scanner, Command[] commands) {
         consoleManager = console;
-        collectionManager = collection;
         this.scanner = scanner;
         this.commands = commands;
         openedScripts = new Stack<>();
